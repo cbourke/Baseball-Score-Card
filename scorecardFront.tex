@@ -1,0 +1,170 @@
+
+\documentclass[class=minimal,border=2pt]{standalone}
+%\documentclass{article}
+%\usepackage[a4paper,margin=0in,landscape]{geometry}
+%\usepackage{fullpage}
+%\pagestyle{empty}
+
+\usepackage{tikz}
+
+\tikzset{
+  atbat/.pic={
+  code={\tikzset{scale=.25}
+  
+\draw[draw=black,very thick] (0,0) rectangle ++(8,6);
+
+\draw[draw=black,thick] (0,3) rectangle ++(1,1);
+\draw[draw=black,thick] (0,4) rectangle ++(1,1);
+\draw[draw=black,thick] (0,5) rectangle ++(1,1);
+\draw[draw=black,thick] (1,4) rectangle ++(1,1);
+\draw[draw=black,thick] (1,5) rectangle ++(1,1);
+
+\begin{scope}[shift={(5,.25)},rotate=45,scale=1.5]
+
+%\draw[fill=yellow!30] (0,0) -- (3.25,0) arc[start angle=0, end angle=90,radius=3.25cm] -- (0,0);
+
+\draw[draw=black,thick,dotted] (0,0) rectangle ++(2.5,2.5);
+\draw[draw=black,thick] (0,0) rectangle ++(.5,.5);
+\draw[draw=black,thick] (0,2.5) rectangle ++(.5,-.5);
+\draw[draw=black,thick] (2.5,0) rectangle ++(-.5,.5);
+\draw[draw=black,thick] (2.5,2.5) rectangle ++(-.5,-.5);
+
+\end{scope}
+
+
+  }}
+}
+
+\tikzset{
+  row/.pic={
+  code={\tikzset{scale=1}
+\draw[draw=black,thick] (0,0) rectangle ++(.5,1.5);
+\draw[draw=black,thick] (.5,0) rectangle ++(2.5,1.5);
+\draw[draw=black,thick] (3,0) rectangle ++(.5,1.5);
+\draw[draw=black,thick] (3.5,0) rectangle ++(.5,1.5);
+\draw[thin] (0,.75) -- (4,.75);
+\path (4,0) pic {atbat};
+\path (6,0) pic {atbat};
+\path (8,0) pic {atbat};
+\path (10,0) pic {atbat};
+\path (12,0) pic {atbat};
+\path (14,0) pic {atbat};
+\path (16,0) pic {atbat};
+\path (18,0) pic {atbat};
+\path (20,0) pic {atbat};
+\path (22,0) pic {atbat};
+\path (24,0) pic {atbat};
+%\draw (26,0) rectangle ++(2,1);
+
+  }}
+}
+
+\tikzset{
+  grid/.pic={
+  code={\tikzset{scale=1}
+
+\path (0,1.5) pic {row};
+\path (0,3.0) pic {row};
+\path (0,4.5) pic {row};
+\path (0,6.0) pic {row};
+\path (0,7.5) pic {row};
+\path (0,9.0) pic {row};
+\path (0,10.5) pic {row};
+\path (0,12.0) pic {row};
+\path (0,13.5) pic {row};
+
+%header
+\draw[draw=black,thick,dashed] (0,15) rectangle ++(26,0.75);
+\draw[draw=black,thick] (0,15) rectangle ++(.5,0.75);
+\node (hash) at (.25,15.375) {\#};
+\draw[draw=black,thick] (0.5,15) rectangle ++(2.5,0.75);
+\node (player) at (1.5,15.375) {\textsc{Player}};
+
+\draw[draw=black,thick] (3,15) rectangle ++(0.5,0.75);
+\node (lr) at (3.25,15.375) {$\frac{L}{R}$};
+
+\draw[draw=black,thick] (3.5,15) rectangle ++(0.5,0.75);
+\node (pos) at (3.75,15.375) { \textsc{p} };
+
+\draw[draw=black,thick] (4,15) rectangle ++(2,0.75);
+\node (one) at (5,15.375) { \textbf{1} };
+\draw[draw=black,thick] (6,15) rectangle ++(2,0.75);
+\node (one) at (7,15.375) { \textbf{2} };
+\draw[draw=black,thick] (8,15) rectangle ++(2,0.75);
+\node (one) at (9,15.375) { \textbf{3} };
+\draw[draw=black,thick] (10,15) rectangle ++(2,0.75);
+\node (one) at (11,15.375) { \textbf{4} };
+\draw[draw=black,thick] (12,15) rectangle ++(2,0.75);
+\node (one) at (13,15.375) { \textbf{5} };
+\draw[draw=black,thick] (14,15) rectangle ++(2,0.75);
+\node (one) at (15,15.375) { \textbf{6} };
+\draw[draw=black,thick] (16,15) rectangle ++(2,0.75);
+\node (one) at (17,15.375) { \textbf{7} };
+\draw[draw=black,thick] (18,15) rectangle ++(2,0.75);
+\node (one) at (19,15.375) { \textbf{8} };
+\draw[draw=black,thick] (20,15) rectangle ++(2,0.75);
+\node (one) at (21,15.375) { \textbf{9} };
+\draw[draw=black,thick] (22,15) rectangle ++(2,0.75);
+\node (one) at (23,15.375) { \textbf{10} };
+\draw[draw=black,thick] (24,15) rectangle ++(2,0.75);
+\node (one) at (25,15.375) { \textbf{11} };
+
+  }}
+}
+
+
+\tikzset{
+  boxscore/.pic={
+  code={\tikzset{scale=1}
+  
+\draw[step=1cm,black] (3,0) grid ++(14,2);
+\draw[black] (0,1) -- ++(3,0);
+\draw[draw=black,very thick] (0,0) rectangle ++(17,2);
+\node[above] (teams) at (1.5,2) {\textsc{Teams}};
+\foreach \i in {1,2,...,11}{
+    \node[above] (inning\i) at (2.5 + \i,2) {\textsc{$\i$}};
+}
+\draw[very thick] (3,0) -- ++(0,2);
+\node[above] (runs) at (14.5,2) {\textsc{R}};
+\draw[very thick] (14,0) -- ++(0,2);
+\node[above] (hits) at (15.5,2) {\textsc{H}};
+\draw[very thick] (15,0) -- ++(0,2);
+\node[above] (errs) at (16.5,2) {\textsc{E}};
+\draw[very thick] (16,0) -- ++(0,2);
+
+  }}
+}
+
+
+
+\begin{document}
+
+%at bat: 1.5cm tall, split in 2
+\begin{tikzpicture}
+
+%\draw[step=1cm,gray,very thin] (0,0) grid (28,21);
+
+\path (1,.5) pic {grid};
+\node[right] (away) at (1,16.5) {\textsc{Away}};
+
+\path (1,17) pic {boxscore};
+
+
+\begin{scope}[shift={(18.5,17)},rotate=0,scale=1]
+
+\draw[draw=black,very thick] (0,0) rectangle ++(8.5,2.5);
+\node[right] (field) at (0,2) {\textsc{Field}};
+\node[right] (date) at (0,1.5) {\textsc{Date/Time}};
+\node[right] (weather) at (0,1) {\textsc{Weather}};
+\node[right] (umpires) at (0,.5) {\textsc{Umpires}};
+
+
+\end{scope}
+
+
+
+\end{tikzpicture}
+
+
+
+\end{document}
